@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Caffe</title>
+    <link rel="icon" href="/media/logo.png" type="image/png">
+    <link rel="icon" href="/media/logo.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/media/logo.png" sizes="16x16" type="image/png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        footer {
+            background-color: #111;
+            color: #ddd;
+            padding: 30px 0;
+            font-size: 1rem;
+            border-top: 5px solid #FFD700;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            border: none;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #444;
+        }
+
+       .header {
+    position: relative;
+    height: 500px;
+    background-image: url('/media/produkt/galactic.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-text h1 {
+    font-size: 64px;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.7);
+}
+
+/* Додај го ова за да ја спуштиш subtext на дното */
+.subtext {
+    position: absolute;
+    bottom: 10px; /* Го позиционира на дното */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+        .subtext {
+            font-size: 1.5rem;
+            color: #FFD700;
+        }
+
+        .card {
+            background: #1c1c1e;
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+
+
+        .product-card {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .product-card.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .card-body {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .card-body h5 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .card-body p {
+            color: #555;
+        }
+
+        .footer-link {
+            color: gold;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            margin: 0 12px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.3);
+            filter: brightness(1.2);
+        }
+
+        /* Прочистување на Layout-от */
+        .container {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .map-container {
+            width: 200px;  /* Ширина на мапата */
+            height: 120px; /* Висина на мапата */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            margin: 20px auto; /* Центрирање */
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .row {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+
+        }
+
+        footer {
+            background-color: #111;
+            color: #ddd;
+            padding: 30px 0;
+            font-size: 1rem;
+            border-top: 5px solid #FFD700;
+            text-align: center;
+        }
+
+        .footer-link {
+            color: gold;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 1);
+        }
+        .neon-button {
+            background: linear-gradient(90deg, #ff8c00, #ffcc00);
+            color: black;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 25px;
+            padding: 12px 30px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .neon-button:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+            transform: scale(1.1);
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(255, 215, 0, 1); }
+            100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        }
+        .header-text h1 {
+            font-size: 64px;
+            animation: glow 2s infinite alternate;
+        }
+
+
+        /* header p */
+            .header-text p{
+            padding: 15px;
+        }
+        .fun-facts {
+            font-family: 'Arial', sans-serif;
+            font-style: italic;
+            color: #888;
+            background-color: #f4f4f4;
+            border-left: 5px solid #FFD700;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center; /* Центрирање на текстот */
+        }
+
+        .fun-facts h3 {
+            font-size: 1.4rem; /* Помал font-size */
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .fun-facts ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .fun-facts li {
+            font-size: 1rem; /* Помал font-size */
+            color: #555;
+            margin: 5px 0;
+        }
+
+        @keyframes move-left-right {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .fun-facts h3 {
+            animation: move-left-right 1s ease-in-out infinite;
+        }
+        .red-text {
+            color: red;
+        }
+        
+        /* SKROLL KOPCE*/
+    .scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Initially hidden */
+    z-index: 1000; /* Ensures it's above other elements */
+}
+
+.scroll-to-top button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%; /* Circular button */
+    border: none;
+    background: linear-gradient(135deg, #007bff, #00d4ff); /* Gradient effect */
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.scroll-to-top button:hover {
+    transform: scale(1.1); /* Slightly enlarges on hover */
+    background: linear-gradient(135deg, #0056b3, #00a3cc);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.8), 0 0 50px rgba(0, 212, 255, 0.7);
+}
+
+.scroll-to-top button:active {
+    transform: scale(0.95);
+}
+
+
+    </style>
+</head>
+<body>
+
+
+<div class="header">
+    <div class="header-text">
+        
+        <p class="subtext">Since 2017</p>
+    </div>
+</div>
+
+<div class="fun-facts">
+    <h3><strong> Вашата генерирана мисла е: </strong></h3>
+    <ul>
+        <li class="quote-text">{{ daily_quote }}</li>
+    </ul>
+</div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Изберете Категорија</h1>
+
+
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category }}</h5>
+                        <button class="btn btn-primary" onclick="showCategoryProducts('{{ category }}')">Прикажи продукти</button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="row" id="productsSection">
+        {% for product in products %}
+            <div class="col-md-3 mb-4 product-card" data-category="{{ product.kategorija }}">
+                <div class="card">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="path/to/default-image.jpg" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="card-body" style="text-align: center;">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text"><strong>{{ product.opis }}</strong></p>
+                        <p class="card-text"><strong>{{ product.cena }} MKD</strong></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="scroll-to-top" id="scrollToTopBtn">
+    <button onclick="scrollToTop()" class="btn neon-button">^</button>
+</div>
+<div class="text-center mb-4">
+    <a href="/gallery" class="btn neon-button">Галерија</a>
+</div>
+<div class="text-center mb-4">
+    <a href="/events" class="btn neon-button">Идни Настани</a>
+</div>
+<footer class="text-center text-light py-3">
+    <div class="map-container">
+        <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2982.0063405503765!2d22.462964476187857!3d41.633994380662294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1355fb0d5d140369%3A0x4f06287a079a2ed6!2sGalactic%20Caff%C3%A9!5e0!3m2!1sen!2smk!4v1739826404790!5m2!1sen!2smk"
+                allowfullscreen=""
+                loading="lazy">
+        </iframe>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <p class="mb-0 me-2">Најди не на:</p>
+        <a href="https://www.facebook.com/galacticcaffe/" target="_blank">
+            <img src="/media/icons/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+        <a href="https://www.instagram.com/galacticcaffe" target="_blank">
+            <img src="/media/icons/instagram.png" alt="Instagram" class="social-icon">
+        </a>
+    </div>
+
+    <p class="mt-2" style="font-style: italic;">
+        Информации и резервации: <a href="tel:+38971844880">071 844 880</a>
+    </p>
+    <p class="mt-2">Дизајнирано од:
+        <a href="https://mk.linkedin.com/in/marko-srbakov-a65b43235" target="_blank" class="footer-link">
+            Marko Srbakov
+        </a>
+    </p>
+</footer>
+
+<div id="instagramModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <h5 class="modal-title">📢 Следете нè на Instagram или Facebook!</h5>
+            </div>
+            <div class="modal-body">
+                <p>За најнови новости и понуди, следете нè на нашата Instagram или Facebook страна.</p>
+                <a href="https://www.instagram.com/galacticcaffe" target="_blank" class="btn btn-primary">
+                    📸 Посети Instagram
+                </a>
+                <a href="https://www.facebook.com/galacticcaffe/" target="_blank" class="btn btn-primary">
+                    📸 Посети Facebook
+                </a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="closeModal">Затвори</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    function showCategoryProducts(category) {
+        let allProducts = document.querySelectorAll('.product-card');
+        allProducts.forEach(function(product) {
+            product.style.display = 'none';
+            product.classList.remove('show');
+        });
+
+        let categoryProducts = document.querySelectorAll('.product-card[data-category="' + category + '"]');
+        categoryProducts.forEach(function(product) {
+            product.style.display = 'block';
+            setTimeout(function() {
+                product.classList.add('show');
+            }, 100);
+        });
+
+
+        document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Show the button when the user scrolls down 300px
+    window.onscroll = function() {
+        let button = document.getElementById("scrollToTopBtn");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // По 120 секунди (2 минути) се прикажува попапот
+        setTimeout(function () {
+            var modal = new bootstrap.Modal(document.getElementById("instagramModal"));
+            modal.show();
+        }, 120000);
+
+        // Додај listener за "Затвори" копчето
+        document.getElementById("closeModal").addEventListener("click", function () {
+            var modalElement = document.getElementById("instagramModal");
+            var modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+        });
+    });
+</script>
+
+</body>
+</html>
